@@ -1,0 +1,27 @@
+# SOVEREIGN AI WORKBENCH (SIH 26117) — PYTHON DEPENDENCIES
+# 100% On-Premise Air-Gapped Technology Stack
+
+# Core FastAPI & Web Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+watchfiles>=0.21.0
+httpx>=0.27.0
+requests>=2.31.0
+
+# Document & Artifact Deliverable Generators
+python-docx>=1.1.0
+openpyxl>=3.1.2
+reportlab>=4.1.0
+Pillow>=10.2.0
+
+# Local RAG Vector Search & OCR Engine
+chromadb>=0.4.22
+pypdf>=4.0.0
+pdf2image>=1.17.0
+pytesseract>=0.3.10
+sentence-transformers>=2.5.0
+
+# Testing & Verification
+pytest>=8.0.0
+pytest-asyncio>=0.23.0

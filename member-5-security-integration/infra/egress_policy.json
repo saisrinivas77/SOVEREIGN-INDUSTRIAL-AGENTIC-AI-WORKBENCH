@@ -1,0 +1,37 @@
+{
+  "version": "2.0",
+  "policy_name": "SOVEREIGN_EGRESS_DEFAULT_DENY",
+  "default_decision": "DENY",
+  "approved_destinations": [
+    {
+      "host": "127.0.0.1",
+      "ports": [8000, 8001, 11434, 3000, 5000],
+      "purpose": "Local model runtime and sovereign services"
+    },
+    {
+      "host": "localhost",
+      "ports": [8000, 8001, 11434, 3000, 5000],
+      "purpose": "Local loopback communication"
+    },
+    {
+      "host": "ollama",
+      "ports": [11434],
+      "purpose": "Internal docker network model service"
+    },
+    {
+      "host": "chromadb",
+      "ports": [8000, 8001],
+      "purpose": "Internal docker network vector database"
+    }
+  ],
+  "forbidden_categories": [
+    "external_ai_apis",
+    "cloud_telemetry",
+    "remote_ocr",
+    "remote_vision",
+    "remote_embeddings",
+    "cloud_storage",
+    "public_internet"
+  ],
+  "audit_required": true
+}

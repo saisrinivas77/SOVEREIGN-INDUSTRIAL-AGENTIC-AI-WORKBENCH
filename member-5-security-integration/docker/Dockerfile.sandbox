@@ -1,0 +1,19 @@
+# Sovereign AI Workbench — Isolated Python Sandbox Execution Container
+# Built for ephemeral execution with zero network access (--network none)
+
+FROM python:3.11-alpine
+
+# Non-root unprivileged runner
+RUN addgroup -g 20002 sandbox && \
+    adduser -u 20002 -G sandbox -D -s /bin/sh sandbox
+
+WORKDIR /sandbox
+
+RUN pip install --no-cache-dir openpyxl
+
+USER sandbox
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+ENTRYPOINT ["python"]

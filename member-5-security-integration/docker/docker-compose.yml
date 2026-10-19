@@ -1,0 +1,83 @@
+version: '3.8'
+
+# Sovereign AI Workbench — Docker Compose Infrastructure
+# Enforces internal network isolation with no external internet egress.
+
+networks:
+  sovereign_internal:
+    driver: bridge
+    internal: true # STRICT NO-INTERNET ISOLATION
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+services:
+  # 1. Local Model Runtime (Ollama)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sovereign_ollama
+    restart: unless-stopped
+    volumes:
+      - ./ollama_models:/root/.ollama
+    networks:
+      - sovereign_internal
+    ports:
+      - "127.0.0.1:11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_KEEP_ALIVE=24h
+
+  # 2. Local Sovereign Vector Database (ChromaDB)
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: sovereign_chroma
+    restart: unless-stopped
+    volumes:
+      - ./chroma_data:/chroma/chroma
+    networks:
+      - sovereign_internal
+    ports:
+      - "127.0.0.1:8001:8000"
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+
+  # 3. Sovereign Backend & API Engine
+  backend:
+    build:
+      context: ../..
+      dockerfile: member-5-security-integration/docker/Dockerfile.backend
+    container_name: sovereign_backend
+    restart: unless-stopped
+    depends_on:
+      - ollama
+      - chromadb
+    networks:
+      - sovereign_internal
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - SOVEREIGN_NETWORK_MODE=restricted
+      - OLLAMA_HOST=http://ollama:11434
+      - CHROMA_HOST=http://chromadb:8000
+      - SOVEREIGN_BASE_DIR=/app
+    volumes:
+      - ../../workspace:/app/workspace
+      - ../../outputs:/app/outputs
+      - ../../audit_logs:/app/audit_logs
+
+  # 4. Sovereign Workbench UI (Next.js)
+  frontend:
+    image: node:20-alpine
+    container_name: sovereign_frontend
+    restart: unless-stopped
+    working_dir: /app
+    depends_on:
+      - backend
+    networks:
+      - sovereign_internal
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/v1
+    command: npm run start

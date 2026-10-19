@@ -1,0 +1,15 @@
+SOVEREIGN INDUSTRIAL MAINTENANCE STANDARD — SOP-IND-402
+
+SECTION 4.2: PRESSURE RELIEF VALVE & BEARING TOLERANCES
+1. Operating Pressure Tolerances:
+   - Rated pressure: 150 PSI.
+   - Permitted operating range: 135 PSI to 165 PSI (+/- 10%).
+   - Action Threshold: Any operating pressure exceeding 165 PSI requires immediate shutdown and overhaul.
+
+2. Bearing Thermal & Vibration Mandates:
+   - Maximum allowable operating temperature: 85.0°C.
+   - Maximum allowable vibration velocity: 4.5 mm/s.
+   - Equipment operating above 90.0°C or 5.0 mm/s must be flagged CRITICAL with immediate bearing replacement.
+
+3. Sign-off Requirements:
+   - All maintenance overhauls must be documented in a signed DOCX approval note and verified PDF report.

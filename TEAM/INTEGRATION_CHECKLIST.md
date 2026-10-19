@@ -1,0 +1,18 @@
+# FINAL INTEGRATION CHECKLIST
+- [ ] All 5 modules start
+- [ ] /api/v1/health healthy
+- [ ] Models available locally
+- [ ] RAG index works
+- [ ] OCR works
+- [ ] Vision works
+- [ ] Agent plan works
+- [ ] Tool registry works
+- [ ] Sandbox blocks network
+- [ ] DOCX opens
+- [ ] XLSX opens
+- [ ] Audit records generated
+- [ ] Security dashboard works
+- [ ] External egress denied/restricted
+- [ ] Golden workflow passes 3 times
+- [ ] Coding workflow passes 3 times
+- [ ] Demo machine tested offline

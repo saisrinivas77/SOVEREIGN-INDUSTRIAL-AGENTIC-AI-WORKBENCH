@@ -1,0 +1,20 @@
+{
+  "project": "SIH26117 Sovereign AI Workbench",
+  "version": "3.0 FINAL",
+  "master_documents": 18,
+  "team_prompts": 14,
+  "contract_focus": [
+    "API",
+    "canonical schemas",
+    "model interface",
+    "agent state machine",
+    "tool registry",
+    "RAG metadata",
+    "security/sovereignty",
+    "prompt engineering",
+    "ownership",
+    "change control",
+    "acceptance matrix",
+    "demo workflow"
+  ]
+}
